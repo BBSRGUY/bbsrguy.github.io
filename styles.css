@@ -194,7 +194,7 @@ footer {
 }
 
 .tile-back {
-  background: rgba(0,255,255,0.1);
+  background: rgb(0,255,255);
   transform: rotateY(180deg);
   display: flex;
   align-items: center;
