@@ -194,12 +194,11 @@ footer {
 }
 
 .tile-back {
-  background: rgb(0,255,255);
+  background: rgb(30, 139, 139);
   transform: rotateY(180deg);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  padding: 0.5rem;
   text-align: center;
 }
