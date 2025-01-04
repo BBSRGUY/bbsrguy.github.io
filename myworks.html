@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Works - Rashmi Ranjan Dash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rashmi Ranjan Dash's Works & Projects">
+
+  <!-- P5.js for background animations -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/addons/p5.dom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/addons/p5.sound.min.js"></script>
+
+  <!-- We'll use a separate JS file for this page's background animation -->
+  <script src="js/myworks.js" defer></script>
+
+  <!-- Same CSS for overall style -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Background Canvas -->
+  <div id="canvas-container"></div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <header class="hero-section">
+      <h1 class="hero-title">My Works</h1>
+      <h2 class="hero-subtitle">Featured Projects & Code Repositories</h2>
+      <p class="hero-intro">Explore 3D interactive tiles highlighting my selected works. Each tile links to a GitHub repository or project showcase.</p>
+    </header>
+
+    <section id="works" class="section">
+      <h2>Featured 3D Tiles</h2>
+      <!-- 3D Tiles Container -->
+      <div class="tiles-container">
+        
+        <!-- 10 Tiles: 3 rows of 3, then 1 in the last row -->
+
+        <!-- Row 1: 3 tiles -->
+        <div class="tile" onclick="window.open('https://github.com/yourRepo1', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 1</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile" onclick="window.open('https://github.com/yourRepo2', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 2</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile" onclick="window.open('https://github.com/yourRepo3', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 3</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: 3 tiles -->
+        <div class="tile" onclick="window.open('https://github.com/yourRepo4', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 4</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile" onclick="window.open('https://github.com/yourRepo5', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 5</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile" onclick="window.open('https://github.com/yourRepo6', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 6</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: 3 tiles -->
+        <div class="tile" onclick="window.open('https://github.com/yourRepo7', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 7</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile" onclick="window.open('https://github.com/yourRepo8', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 8</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tile" onclick="window.open('https://github.com/yourRepo9', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 9</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 4: 1 tile -->
+        <div class="tile" onclick="window.open('https://github.com/yourRepo10', '_blank')">
+          <div class="tile-inner">
+            <div class="tile-front">
+              <h3>Project Title 10</h3>
+            </div>
+            <div class="tile-back">
+              <p>Click to see codebase on GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Rashmi Ranjan Dash | <a href="index.html">Back to Home</a></p>
+    </footer>
+  </div>
+</body>
+</html>
