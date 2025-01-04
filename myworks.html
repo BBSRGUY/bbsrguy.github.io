@@ -12,10 +12,10 @@
   <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/addons/p5.sound.min.js"></script>
 
   <!-- We'll use a separate JS file for this page's background animation -->
-  <script src="myworks.js" defer></script>
+  <script src="js/myworks.js" defer></script>
 
   <!-- Same CSS for overall style -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <!-- Background Canvas -->
@@ -26,7 +26,7 @@
     <header class="hero-section">
       <h1 class="hero-title">My Works</h1>
       <h2 class="hero-subtitle">Featured Projects & Code Repositories</h2>
-      <p class="hero-intro">Explore 3D interactive tiles highlighting my selected works. Each tile links to a GitHub repository or project showcase.</p>
+      <p class="hero-intro">Explore my selected works. Each tile links to a GitHub repository or project showcase.</p>
     </header>
 
     <section id="works" class="section">
@@ -35,117 +35,131 @@
       <div class="tiles-container">
         
         <!-- 10 Tiles: 3 rows of 3, then 1 in the last row -->
-
+        
         <!-- Row 1: 3 tiles -->
-        <div class="tile" onclick="window.open('https://github.com/yourRepo1', '_blank')">
+
+        <!-- 1) AI-Powered Notes Summarizer -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/ai-notes-summarizer', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 1</h3>
+              <h3>AI-Powered Notes Summarizer</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Generates concise summaries using an LLM. Click for the codebase.</p>
             </div>
           </div>
         </div>
 
-        <div class="tile" onclick="window.open('https://github.com/yourRepo2', '_blank')">
+        <!-- 2) QuickScrape: Web Scraper & Dashboard -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/quickscrape-dashboard', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 2</h3>
+              <h3>QuickScrape Dashboard</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Scrape targeted data & display on a mini dashboard. Click for the codebase.</p>
             </div>
           </div>
         </div>
 
-        <div class="tile" onclick="window.open('https://github.com/yourRepo3', '_blank')">
+        <!-- 3) JSON-to-SQL Converter CLI -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/json-to-sql-cli', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 3</h3>
+              <h3>JSON-to-SQL Converter CLI</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Transforms JSON into SQL insert statements. Click for the codebase.</p>
             </div>
           </div>
         </div>
 
         <!-- Row 2: 3 tiles -->
-        <div class="tile" onclick="window.open('https://github.com/yourRepo4', '_blank')">
+
+        <!-- 4) Micro Modernization Analyzer (Mainframe Edition) -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/micro-modern-analyzer', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 4</h3>
+              <h3>Micro Modern Analyzer</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Detect legacy COBOL/JCL patterns & propose fixes. Click for codebase.</p>
             </div>
           </div>
         </div>
 
-        <div class="tile" onclick="window.open('https://github.com/yourRepo5', '_blank')">
+        <!-- 5) AI-Driven Tech Stack Recommender -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/ai-techstack-recommender', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 5</h3>
+              <h3>AI Tech Stack Recommender</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Suggests optimal stacks for your project via LLM. Click for codebase.</p>
             </div>
           </div>
         </div>
 
-        <div class="tile" onclick="window.open('https://github.com/yourRepo6', '_blank')">
+        <!-- 6) Magic Code Snippet Manager -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/magic-snippet-manager', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 6</h3>
+              <h3>Magic Snippet Manager</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Store & retrieve code snippets across multiple languages. Click for codebase.</p>
             </div>
           </div>
         </div>
 
         <!-- Row 3: 3 tiles -->
-        <div class="tile" onclick="window.open('https://github.com/yourRepo7', '_blank')">
+
+        <!-- 7) Auto Deployment Pipeline Setup -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/auto-deploy-pipeline-setup', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 7</h3>
+              <h3>Auto Deployment Setup</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Generates CI/CD pipelines for various frameworks. Click for codebase.</p>
             </div>
           </div>
         </div>
 
-        <div class="tile" onclick="window.open('https://github.com/yourRepo8', '_blank')">
+        <!-- 8) Screenshot & OCR Tool -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/screenshot-ocr-tool', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 8</h3>
+              <h3>Screenshot OCR Tool</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Capture screen regions & run OCR to extract text. Click for codebase.</p>
             </div>
           </div>
         </div>
 
-        <div class="tile" onclick="window.open('https://github.com/yourRepo9', '_blank')">
+        <!-- 9) Digital Kanban Board -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/digital-kanban-board', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 9</h3>
+              <h3>Digital Kanban Board</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Manage tasks with drag-&-drop columns. Click for codebase.</p>
             </div>
           </div>
         </div>
 
         <!-- Row 4: 1 tile -->
-        <div class="tile" onclick="window.open('https://github.com/yourRepo10', '_blank')">
+
+        <!-- 10) Quantum Concept Visualizer -->
+        <div class="tile" onclick="window.open('https://github.com/BBSRGUY/quantum-visualizer', '_blank')">
           <div class="tile-inner">
             <div class="tile-front">
-              <h3>Project Title 10</h3>
+              <h3>Quantum Concept Visualizer</h3>
             </div>
             <div class="tile-back">
-              <p>Click to see codebase on GitHub.</p>
+              <p>Interactive display of quantum gates & states. Click for codebase.</p>
             </div>
           </div>
         </div>
