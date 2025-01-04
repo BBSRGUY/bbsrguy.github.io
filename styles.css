@@ -107,3 +107,75 @@ footer {
   color: #888;
   font-size: 0.9rem;
 }
+
+/* 3D Tiles Container */
+.tiles-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* For the last row with 1 tile, it'll just occupy the first column, 
+   but that’s okay for demonstration— the tile is still displayed. 
+   We simply don't fill the remaining columns for the last row. */
+
+/* Individual Tiles */
+.tile {
+  perspective: 1000px;
+  cursor: pointer;
+  width: 100%;
+  min-height: 200px;
+  background: transparent;
+  position: relative;
+  border-radius: 10px;
+  overflow: visible;
+  transition: transform 0.4s ease;
+}
+
+.tile-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+  position: relative;
+  border: 2px solid #0ff;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  padding: 1rem;
+}
+
+.tile:hover .tile-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front & Back */
+.tile-front, .tile-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.tile-front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile-front h3 {
+  font-size: 1.2rem;
+  color: #0ff;
+  text-align: center;
+}
+
+.tile-back {
+  background: rgba(0,255,255,0.1);
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0.5rem;
+  text-align: center;
+}
