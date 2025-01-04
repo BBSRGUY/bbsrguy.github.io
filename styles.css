@@ -1,0 +1,109 @@
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body styling */
+body {
+  background: #000; /* The canvas will be drawn over this */
+  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Canvas container to hold P5 sketch */
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* behind content */
+  overflow: hidden;
+}
+
+/* Main content area */
+.content {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  backdrop-filter: blur(8px);
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  animation: neonGlare 3s ease-in-out infinite alternate;
+}
+
+@keyframes neonGlare {
+  0% {
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+  }
+  100% {
+    text-shadow: 0 0 20px #00ffffbb, 0 0 30px #00ffffaa, 0 0 40px #00ffff88;
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #0ff;
+  margin-bottom: 1rem;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #0ff;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+/* Lists styling */
+ul {
+  list-style-type: square;
+  margin-left: 1.2rem;
+  line-height: 1.6;
+}
+
+ul.skills-list {
+  columns: 2;
+  column-gap: 2rem;
+}
+
+/* Experience section */
+.experience-item h3 {
+  color: #0ff;
+  margin-bottom: 0.5rem;
+}
+
+/* Project items */
+.project-item h3 {
+  color: #0ff;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  color: #888;
+  font-size: 0.9rem;
+}
