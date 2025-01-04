@@ -60,3 +60,18 @@ class Particle {
     ellipse(this.x, this.y, this.r);
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const dateElement = document.getElementById('current-date');
+  const today = new Date();
+  
+  // Format: January 3, 2025
+  const formattedDate = today.toLocaleString('default', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+
+  dateElement.textContent = formattedDate;
+});
+
