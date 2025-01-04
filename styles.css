@@ -88,6 +88,30 @@ ul.skills-list {
   column-gap: 2rem;
 }
 
+.myworks-button {
+  background: linear-gradient(135deg, #0ff, #00bcd4);
+  border: none;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.myworks-button:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.7), 
+              0 0 40px rgba(0, 255, 255, 0.5);
+  transform: translateY(-3px) scale(1.05);
+}
+
+.myworks-button:active {
+  transform: translateY(0) scale(1.0);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
 /* Experience section */
 .experience-item h3 {
   color: #0ff;
