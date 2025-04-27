@@ -1,0 +1,380 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <!-- Definitions for filters, gradients, and animations -->
+  <defs>
+    <!-- Enhanced glow filter -->
+    <filter id="enhancedGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feFlood flood-color="#3040C0" flood-opacity="0.3" result="coloredBlur"/>
+      <feComposite in="coloredBlur" in2="blur" operator="in" result="coloredBlurEffect"/>
+      <feComposite in="SourceGraphic" in2="coloredBlurEffect" operator="over"/>
+    </filter>
+    
+    <!-- Improved gradient with more color variations -->
+    <linearGradient id="letterGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#40B0FF" />
+      <stop offset="60%" stop-color="#4060D0" />
+      <stop offset="100%" stop-color="#4040B0" />
+    </linearGradient>
+    
+    <!-- Pulsing animation for nodes -->
+    <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9">
+        <animate attributeName="stop-opacity" values="0.9;0.6;0.9" dur="3s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#8080FF" stop-opacity="0.1">
+        <animate attributeName="stop-opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite" />
+      </stop> 
+    </radialGradient>
+    
+    <!-- Animation for neural connections -->
+    <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.1" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.7">
+        <animate attributeName="offset" values="0;1" dur="3s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.1" />
+    </linearGradient>
+    
+    <!-- Animation for dots above letters -->
+    <linearGradient id="dotsGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#A0E0FF" stop-opacity="0.6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Neural network background structure -->
+  <g id="neural-network" opacity="0.5">
+    <!-- Horizontal neural connections -->
+    <line x1="100" y1="50" x2="700" y2="50" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    <line x1="150" y1="100" x2="650" y2="100" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    <line x1="100" y1="150" x2="700" y2="150" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    <line x1="150" y1="200" x2="650" y2="200" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    
+    <!-- Vertical neural connections -->
+    <line x1="200" y1="20" x2="200" y2="240" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    <line x1="350" y1="20" x2="350" y2="240" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    <line x1="500" y1="20" x2="500" y2="240" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    <line x1="650" y1="20" x2="650" y2="240" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    
+    <!-- Diagonal neural connections -->
+    <line x1="150" y1="50" x2="350" y2="200" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    <line x1="350" y1="50" x2="550" y2="200" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    <line x1="550" y1="50" x2="350" y2="200" stroke="url(#connectionGradient)" stroke-width="1.5" />
+    
+    <!-- Neural nodes at intersections -->
+    <circle cx="200" cy="50" r="4" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="4;5;4" dur="4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="350" cy="50" r="4" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="4;5;4" dur="3.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="500" cy="50" r="4" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="4;5;4" dur="4.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="650" cy="50" r="4" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="4;5;4" dur="3.2s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle cx="200" cy="150" r="4" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="4;5;4" dur="3.8s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="350" cy="150" r="4" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="4;5;4" dur="4.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="500" cy="150" r="4" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="4;5;4" dur="3.7s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="650" cy="150" r="4" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="4;5;4" dur="4.3s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- Main ODEN letters with enhanced effects -->
+  <g filter="url(#enhancedGlow)" transform="translate(80, 60)">
+    <rect x="-35" y="0" width="25" height="160" rx="10" ry="10" fill="url(#letterGradient)" />
+    <!-- "O" letter - standardized width -->
+    <rect x="10" y="0" width="120" height="160" rx="60" ry="60" fill="url(#letterGradient)">
+      <animate attributeName="opacity" values="0.95;1;0.95" dur="5s" repeatCount="indefinite" />
+    </rect>
+    
+    <!-- Animated stroke for "O" -->
+    <rect x="10" y="0" width="120" height="160" rx="60" ry="60" fill="none" stroke="#80C0FF" stroke-width="2" stroke-dasharray="5,240" stroke-dashoffset="0" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" from="0" to="245" dur="10s" repeatCount="indefinite" />
+    </rect>
+    
+    <!-- Dots above "O" -->
+    <g fill="url(#letterGradient)">
+      <rect x="25" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="50" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="3.2s" repeatCount="indefinite" />
+      </rect>
+      <rect x="75" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.4s" repeatCount="indefinite" />
+      </rect>
+      <rect x="100" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3.6s" repeatCount="indefinite" />
+      </rect>
+    </g>
+    <!-- Dots below "O" -->
+    <g fill="url(#letterGradient)">
+      <rect x="25" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="50" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="3.2s" repeatCount="indefinite" />
+      </rect>
+      <rect x="75" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.4s" repeatCount="indefinite" />
+      </rect>
+      <rect x="100" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3.6s" repeatCount="indefinite" />
+      </rect>
+    </g>
+    <!-- "D" letter - standardized width -->
+    <path d="M150 0 
+             L220 0 
+             Q270 0, 270 80 
+             Q270 160, 220 160 
+             L150 160 Z"
+          fill="url(#letterGradient)">
+      <animate attributeName="opacity" values="0.95;1;0.95" dur="5s" repeatCount="indefinite" />
+    </path>
+    
+    <!-- Animated stroke for "D" -->
+    <path d="M150 0 
+             L220 0 
+             Q270 0, 270 80 
+             Q270 160, 220 160 
+             L150 160 Z"
+          fill="none" stroke="#80C0FF" stroke-width="2" stroke-dasharray="5,380" stroke-dashoffset="0" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" from="385" to="0" dur="12s" repeatCount="indefinite" />
+    </path>
+    
+    <!-- Dots above "D" -->
+    <g fill="url(#letterGradient)">
+      <rect x="150" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.1s" repeatCount="indefinite" />
+      </rect>
+      <rect x="175" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="3.3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="200" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.5s" repeatCount="indefinite" />
+      </rect>
+      <rect x="225" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3.7s" repeatCount="indefinite" />
+      </rect>
+      <rect x="250" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.9s" repeatCount="indefinite" />
+      </rect>
+    </g>
+    <!-- Dots below "D" -->
+    <g fill="url(#letterGradient)">
+      <rect x="150" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.1s" repeatCount="indefinite" />
+      </rect>
+      <rect x="175" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="3.3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="200" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.5s" repeatCount="indefinite" />
+      </rect>
+      <rect x="225" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3.7s" repeatCount="indefinite" />
+      </rect>
+      <rect x="250" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.9s" repeatCount="indefinite" />
+      </rect>
+    </g>
+    <!-- "E" letter - wider as requested, standardized width -->
+    <path d="M310 0 
+             L430 0 
+             L430 30 
+             L340 30 
+             L340 65 
+             L420 65 
+             L420 95 
+             L340 95 
+             L340 130 
+             L430 130 
+             L430 160 
+             L310 160 Z"
+          fill="url(#letterGradient)">
+      <animate attributeName="opacity" values="0.95;1;0.95" dur="5s" repeatCount="indefinite" />
+    </path>
+    
+    <!-- Animated stroke for "E" -->
+    <path d="M310 0 
+             L430 0 
+             L430 30 
+             L340 30 
+             L340 65 
+             L420 65 
+             L420 95 
+             L340 95 
+             L340 130 
+             L430 130 
+             L430 160 
+             L310 160 Z"
+          fill="none" stroke="#80C0FF" stroke-width="2" stroke-dasharray="5,480" stroke-dashoffset="0" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" from="0" to="485" dur="15s" repeatCount="indefinite" />
+    </path>
+    
+    <!-- Dots above "E" -->
+    <g fill="url(#letterGradient)">
+      <rect x="310" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.2s" repeatCount="indefinite" />
+      </rect>
+      <rect x="335" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.2s" repeatCount="indefinite" />
+      </rect>
+      <rect x="360" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="3.4s" repeatCount="indefinite" />
+      </rect>
+      <rect x="385" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.6s" repeatCount="indefinite" />
+      </rect>
+      <rect x="410" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3.8s" repeatCount="indefinite" />
+      </rect>
+    </g>
+    <!-- Dots below "E" -->
+    <g fill="url(#letterGradient)">
+      <rect x="310" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.2s" repeatCount="indefinite" />
+      </rect>
+      <rect x="335" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.2s" repeatCount="indefinite" />
+      </rect>
+      <rect x="360" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="3.4s" repeatCount="indefinite" />
+      </rect>
+      <rect x="385" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.6s" repeatCount="indefinite" />
+      </rect>
+      <rect x="410" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3.8s" repeatCount="indefinite" />
+      </rect>
+    </g>
+
+    <!-- "N" letter - standardized width -->
+    <path d="M470 0 
+             L500 0 
+             L500 110 
+             L550 0 
+             L590 0 
+             L590 160 
+             L560 160 
+             L560 50 
+             L510 160 
+             L470 160 Z"
+          fill="url(#letterGradient)">
+      <animate attributeName="opacity" values="0.95;1;0.95" dur="5s" repeatCount="indefinite" />
+    </path>
+    
+    <!-- Animated stroke for "N" -->
+    <path d="M470 0 
+             L500 0 
+             L500 110 
+             L550 0 
+             L590 0 
+             L590 160 
+             L560 160 
+             L560 50 
+             L510 160 
+             L470 160 Z"
+          fill="none" stroke="#80C0FF" stroke-width="2" stroke-dasharray="5,620" stroke-dashoffset="0" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" from="625" to="0" dur="18s" repeatCount="indefinite" />
+    </path>
+    <rect x="610" y="0" width="25" height="160" rx="10" ry="10" fill="url(#letterGradient)" />
+    <!-- Dots above "N" -->
+    <g fill="url(#letterGradient)">
+      <rect x="470" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="495" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="520" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="3.5s" repeatCount="indefinite" />
+      </rect>
+      <rect x="545" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.7s" repeatCount="indefinite" />
+      </rect>
+      <rect x="570" y="-20" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3.9s" repeatCount="indefinite" />
+      </rect>
+    </g>
+    <!-- Dots below "N" -->
+    <g fill="url(#letterGradient)">
+      <rect x="470" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="495" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="3.3s" repeatCount="indefinite" />
+      </rect>
+      <rect x="520" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="3.5s" repeatCount="indefinite" />
+      </rect>
+      <rect x="545" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3.7s" repeatCount="indefinite" />
+      </rect>
+      <rect x="570" y="172" width="15" height="6" rx="3" ry="3">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3.9s" repeatCount="indefinite" />
+      </rect>
+    </g>
+  </g>
+  
+  <!-- Neural network nodes on the letters for added effect -->
+  <g id="letter-nodes">
+    <circle cx="140" cy="170" r="3" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="3;4;3" dur="4.1s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="250" cy="100" r="3" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="3;4;3" dur="3.9s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="380" cy="150" r="3" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="3;4;3" dur="4.3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="520" cy="120" r="3" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="3;4;3" dur="4.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="620" cy="200" r="3" fill="url(#nodeGradient)">
+      <animate attributeName="r" values="3;4;3" dur="3.8s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  <!-- Data flow animation connecting O and N with black strokes -->
+<g id="o-to-n-data-flow">
+  <!-- Path 1: Top flow line -->
+  <path d="M140,80 C240,60 380,40 550,80" 
+        fill="none" stroke="#80C0FF" stroke-width="1.2" stroke-dasharray="8,12" opacity="0.7">
+    <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1.5s" repeatCount="indefinite" />
+  </path>
+  
+  <!-- Path 2 -->
+  <path d="M140,110 C250,95 370,85 550,110" 
+        fill="none" stroke="black" stroke-width="1.2" stroke-dasharray="8,12" opacity="0.7">
+    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite" />
+  </path>
+  
+  <!-- Path 3: Middle flow line -->
+  <path d="M140,140 C260,130 360,130 550,140" 
+        fill="none" stroke="#80C0FF" stroke-width="1.2" stroke-dasharray="8,12" opacity="0.7">
+    <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2.5s" repeatCount="indefinite" />
+  </path>
+  
+  <!-- Path 4 -->
+  <path d="M140,170 C270,165 350,175 550,170" 
+        fill="none" stroke="black" stroke-width="1.2" stroke-dasharray="8,12" opacity="0.7">
+    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="2.2s" repeatCount="indefinite" />
+  </path>
+  
+  <!-- Path 5: Bottom flow line -->
+  <path d="M140,200 C280,200 340,220 550,200" 
+        fill="none" stroke="#80C0FF" stroke-width="1.2" stroke-dasharray="8,12" opacity="0.7">
+    <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1.8s" repeatCount="indefinite" />
+  </path>
+</g>
+</svg>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ODEN - English-Odia Bilingual LLM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <!-- Noise overlay and preloader -->
+  <div class="noise-overlay"></div>
+  <div class="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">ODEN</div>
+      <div class="preloader-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-dot"></div>
+      </div>
+      <div class="preloader-text">Loading...</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="assets/images/ODEN_LOGO.png" alt="ODEN Logo" class="logo-img" />
+        </a>
+        <div class="logo-text-container">
+          <span class="logo-text">ODEN</span>
+          <span class="subtitle">English-Odia Bilingual LLM</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link" data-tooltip="Learn About ODEN">About</a></li>
+        <li><a href="#features" class="nav-link" data-tooltip="Explore Features">Features</a></li>
+        <li><a href="#architecture" class="nav-link" data-tooltip="Understand Architecture">Architecture</a></li>
+        <li><a href="#demo" class="nav-link" data-tooltip="Try ODEN">Demo</a></li>
+        <li><a href="#contact" class="nav-link" data-tooltip="Get in Touch">Contact</a></li>
+      </ul>
+      <div class="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <h1 class="main-title">ODEN</h1>
+        <div class="language-container">
+          <span class="language english">English</span>
+          <div class="separator"></div>
+          <span class="language odia">ଓଡ଼ିଆ</span>
+        </div>
+        <p class="hero-description">
+          A cutting-edge bilingual language model bridging linguistic barriers
+        </p>
+        <div class="cta-buttons">
+          <!-- cta-primary scrolls to Demo and cta-secondary scrolls to About -->
+          <button class="cta-primary interactive-element">Try ODEN</button>
+          <button class="cta-secondary interactive-element">Learn More</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="model-showcase with-3d-effect">
+          <div class="orbit-container">
+            <div class="orbit">
+              <div class="orbit-dot"></div>
+            </div>
+            <div class="orbit" style="animation-delay: -5s;">
+              <div class="orbit-dot"></div>
+            </div>
+            <div class="orbit" style="animation-delay: -10s;">
+              <div class="orbit-dot"></div>
+            </div>
+          </div>
+          <div class="model-core">
+            <div class="core-inner">ODEN</div>
+          </div>
+        </div>
+      </div>
+      <!-- Scroll down indicator with click interaction -->
+      <div class="scroll-indicator interactive-element">
+        <span>Scroll to explore</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="hero-particles particle-effect"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="section-header">
+        <h2>About ODEN</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="glass-card frosted-glass">
+        <div class="card-content">
+          <p>
+            ODEN (Odia-English Neural model) is a state-of-the-art bilingual language model designed to process and generate text in both English and Odia languages seamlessly.
+          </p>
+          <p>
+            By bridging linguistic barriers, ODEN opens new possibilities for communication, education, and cultural preservation.
+          </p>
+        </div>
+      </div>
+      <div class="stats-container">
+        <!-- Stats cards remain unchanged -->
+        <div class="stat-card frosted-glass neumorphic hover-glow">
+          <div class="stat-number" data-count="2">0</div>
+          <div class="stat-label">Languages</div>
+        </div>
+        <div class="stat-card frosted-glass neumorphic hover-glow">
+          <div class="stat-number" data-count="7">0</div>
+          <div class="stat-label">Billion Parameters</div>
+        </div>
+        <div class="stat-card frosted-glass neumorphic hover-glow">
+          <div class="stat-number" data-count="50">0</div>
+          <div class="stat-label">Million Potential Users</div>
+        </div>
+        <div class="stat-card frosted-glass neumorphic hover-glow">
+          <div class="stat-number" data-count="99">0</div>
+          <div class="stat-label">Translation Accuracy %</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+      <div class="section-header">
+        <h2>Features</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="features-grid">
+        <!-- Six feature cards (unchanged content) -->
+        <div class="feature-card frosted-glass hover-scale">
+          <div class="feature-icon"><i class="fas fa-language"></i></div>
+          <h3>Bilingual Processing</h3>
+          <p>Understands and generates text in both English and Odia seamlessly.</p>
+        </div>
+        <div class="feature-card frosted-glass hover-scale">
+          <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
+          <h3>Neural Translation</h3>
+          <p>Context-aware translations that preserve cultural nuances.</p>
+        </div>
+        <div class="feature-card frosted-glass hover-scale">
+          <div class="feature-icon"><i class="fas fa-book"></i></div>
+          <h3>Cultural Context</h3>
+          <p>Deep understanding of cultural expressions for localized content.</p>
+        </div>
+        <div class="feature-card frosted-glass hover-scale">
+          <div class="feature-icon"><i class="fas fa-code"></i></div>
+          <h3>Code Understanding</h3>
+          <p>Processes and generates code with bilingual documentation.</p>
+        </div>
+        <div class="feature-card frosted-glass hover-scale">
+          <div class="feature-icon"><i class="fas fa-robot"></i></div>
+          <h3>Conversational AI</h3>
+          <p>Engages in natural conversations in both languages.</p>
+        </div>
+        <div class="feature-card frosted-glass hover-scale">
+          <div class="feature-icon"><i class="fas fa-feather"></i></div>
+          <h3>Creative Writing</h3>
+          <p>Generates creative content like stories, poems, and essays.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="section">
+      <div class="section-header">
+        <h2>Model Architecture</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="architecture-display">
+        <div class="architecture-visual with-3d-effect">
+          <div class="layer interactive-element" data-layer="Input Embedding">
+            <div class="layer-visual"></div>
+            <div class="layer-label">Input Embedding</div>
+          </div>
+          <div class="layer interactive-element" data-layer="Encoder Layers">
+            <div class="layer-visual"></div>
+            <div class="layer-label">Encoder Layers</div>
+          </div>
+          <div class="layer interactive-element" data-layer="Cross-Attention">
+            <div class="layer-visual"></div>
+            <div class="layer-label">Cross-Attention</div>
+          </div>
+          <div class="layer interactive-element" data-layer="Decoder Layers">
+            <div class="layer-visual"></div>
+            <div class="layer-label">Decoder Layers</div>
+          </div>
+          <div class="layer interactive-element" data-layer="Output Projection">
+            <div class="layer-visual"></div>
+            <div class="layer-label">Output Projection</div>
+          </div>
+        </div>
+        <div class="architecture-details">
+          <div class="detail-panel frosted-glass" id="detail-Input-Embedding">
+            <h3>Input Embedding</h3>
+            <p>Transforms tokens into dense vector representations that capture semantic meaning.</p>
+          </div>
+          <div class="detail-panel frosted-glass" id="detail-Encoder-Layers">
+            <h3>Encoder Layers</h3>
+            <p>Contextualizes input text through multiple transformer layers using self-attention.</p>
+          </div>
+          <div class="detail-panel frosted-glass" id="detail-Cross-Attention">
+            <h3>Cross-Attention</h3>
+            <p>Facilitates translation and reasoning by attending to different parts of the input sequence.</p>
+          </div>
+          <div class="detail-panel frosted-glass" id="detail-Decoder-Layers">
+            <h3>Decoder Layers</h3>
+            <p>Generates coherent output text based on encoded representations.</p>
+          </div>
+          <div class="detail-panel frosted-glass" id="detail-Output-Projection">
+            <h3>Output Projection</h3>
+            <p>Converts model output into probability distributions over vocabulary tokens.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="section">
+      <div class="section-header">
+        <h2>Interactive Demo</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="demo-container frosted-glass">
+        <!-- Demo controls and interface (the JavaScript handles task selection, language toggle, etc.) -->
+        <div class="demo-controls">
+          <div class="language-toggle">
+            <label class="switch interactive-element">
+              <input type="checkbox" id="language-switch" />
+              <span class="slider round"></span>
+            </label>
+            <div class="toggle-labels">
+              <span id="english-label">English Input</span>
+              <span id="odia-label">ଓଡ଼ିଆ Input</span>
+            </div>
+          </div>
+          <div class="task-selector">
+            <button class="task-btn active interactive-element" data-task="translation">Translation</button>
+            <button class="task-btn interactive-element" data-task="conversation">Conversation</button>
+            <button class="task-btn interactive-element" data-task="creative">Creative Writing</button>
+            <button class="task-btn interactive-element" data-task="coding">Code Generation</button>
+          </div>
+        </div>
+        <div class="demo-interface">
+          <div class="input-container">
+            <div class="input-header">
+              <span id="input-language">English</span>
+              <button class="clear-btn interactive-element">Clear</button>
+            </div>
+            <textarea id="demo-input" placeholder="Type your input here..." class="terminal-text"></textarea>
+            <button id="submit-btn" class="interactive-element hover-glow">Generate Response</button>
+          </div>
+          <div class="output-container">
+            <div class="output-header">
+              <span id="output-language">ଓଡ଼ିଆ</span>
+              <button class="copy-btn interactive-element" data-tooltip="Copy to clipboard">Copy</button>
+            </div>
+            <div id="demo-output" class="demo-output">
+              <div class="loading-animation">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+              <p class="output-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="example-prompts">
+          <h4>Example Prompts</h4>
+          <div class="prompt-pills">
+            <span class="prompt-pill interactive-element" data-prompt="Translate this sentence to Odia: The morning sun glistens on the river.">English to Odia translation</span>
+            <span class="prompt-pill interactive-element" data-prompt="ମୋ ସହର ବିଷୟରେ ଏକ ଛୋଟ ଅନୁଚ୍ଛେଦ ଲେଖ।">Odia writing prompt</span>
+            <span class="prompt-pill interactive-element" data-prompt="Write a function to find prime numbers with bilingual comments.">Bilingual code generation</span>
+            <span class="prompt-pill interactive-element" data-prompt="Tell me about the history of Odisha in simple terms.">Historical information</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="section">
+      <div class="section-header">
+        <h2>Use Cases</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="use-cases-container">
+        <div class="use-case-card frosted-glass hover-scale">
+          <div class="use-case-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="use-case-content">
+            <h3>Education</h3>
+            <p>Enables bilingual education tools for students and educators alike.</p>
+          </div>
+        </div>
+        <div class="use-case-card frosted-glass hover-scale">
+          <div class="use-case-icon"><i class="fas fa-newspaper"></i></div>
+          <div class="use-case-content">
+            <h3>Content Creation</h3>
+            <p>Automates content creation and localization for broader audiences.</p>
+          </div>
+        </div>
+        <div class="use-case-card frosted-glass hover-scale">
+          <div class="use-case-icon"><i class="fas fa-briefcase"></i></div>
+          <div class="use-case-content">
+            <h3>Business</h3>
+            <p>Streamlines cross-lingual communications for international operations.</p>
+          </div>
+        </div>
+        <div class="use-case-card frosted-glass hover-scale">
+          <div class="use-case-icon"><i class="fas fa-landmark"></i></div>
+          <div class="use-case-content">
+            <h3>Government Services</h3>
+            <p>Facilitates digital governance by bridging language gaps in public services.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="section-header">
+        <h2>Contact</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-container">
+        <div class="contact-form-container frosted-glass">
+          <form class="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn interactive-element hover-glow">Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info">
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <span>contact@oden-ai.org</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Bhubaneswar, Odisha, India</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 123 456 7890</span>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link interactive-element" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link interactive-element" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link interactive-element" data-tooltip="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="social-link interactive-element" data-tooltip="Discord"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <span class="logo-text">ODEN</span>
+          <span class="footer-tagline">Bridging languages, connecting cultures</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#architecture">Architecture</a></li>
+              <li><a href="#demo">Demo</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">API</a></li>
+              <li><a href="#">Research Paper</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">License</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ODEN - A QUAXCELLENCE initiative. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Background effects canvas -->
+  <div id="background-canvas"></div>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
