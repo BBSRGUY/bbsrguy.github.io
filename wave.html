@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Neon Sine Wave – GLSL Playground</title>
+<style>
+  :root {
+    --bg: #05060a;
+    --panel-bg: rgba(9, 15, 25, 0.82);
+    --panel-border: rgba(180, 241, 255, 0.12);
+    --accent: #55e6ff;
+    --accent-soft: rgba(85, 230, 255, 0.2);
+    --accent-secondary: #ff4fd8;
+    --text-main: #f4f4ff;
+    --text-muted: #a0a7c0;
+    --error-bg: rgba(40, 0, 0, 0.9);
+    --error-border: rgba(255, 120, 120, 0.42);
+    --radius-lg: 14px;
+    --radius-sm: 9px;
+    --blur-strong: 18px;
+    --blur-soft: 8px;
+    --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.75);
+    --shadow-small: 0 8px 20px rgba(0, 0, 0, 0.6);
+    --transition-fast: 0.18s ease-out;
+    --transition-med: 0.26s ease-out;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    background: radial-gradient(circle at top, #111827 0, #020308 42%, #000000 100%);
+    color: var(--text-main);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                 "Segoe UI", sans-serif;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at top left, rgba(85, 230, 255, 0.16), transparent 55%),
+      radial-gradient(circle at bottom right, rgba(255, 79, 216, 0.18), transparent 55%),
+      radial-gradient(circle at center, rgba(0,0,0,0.7), transparent 65%);
+    mix-blend-mode: screen;
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: 0;
+  }
+
+  /* MAIN CONTROL PANEL (bottom-left) */
+  .ui {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 20;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 12px 12px;
+    background: var(--panel-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--panel-border);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(var(--blur-strong)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-strong)) saturate(140%);
+    transform-origin: bottom left;
+    animation: ui-pop-in 380ms var(--transition-med);
+    max-width: min(420px, 90vw);
+  }
+
+  .ui-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+  }
+
+  .ui-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: radial-gradient(circle, var(--accent) 0, #23a4ff 50%, transparent 100%);
+    box-shadow: 0 0 8px rgba(85, 230, 255, 0.9);
+  }
+
+  .ui-title-strong {
+    color: var(--text-main);
+    font-weight: 600;
+  }
+
+  .ui-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ui button {
+    background: radial-gradient(circle at top left, rgba(85, 230, 255, 0.16), rgba(11, 22, 45, 0.95));
+    border: 1px solid rgba(165, 224, 255, 0.22);
+    color: var(--text-main);
+    padding: 7px 11px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: var(--shadow-small);
+    backdrop-filter: blur(var(--blur-soft));
+    -webkit-backdrop-filter: blur(var(--blur-soft));
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast),
+      background var(--transition-med),
+      color var(--transition-fast);
+  }
+
+  .ui button span.icon {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  .ui button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.32);
+    box-shadow: 0 12px 30px rgba(70, 181, 255, 0.35);
+    background: radial-gradient(circle at top left, rgba(85, 230, 255, 0.26), rgba(9, 18, 35, 1));
+  }
+
+  .ui button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+  }
+
+  .ui button.primary {
+    background: linear-gradient(135deg, #16c5ff 0, #3b82f6 45%, #ff4fd8 100%);
+    border-color: rgba(255, 255, 255, 0.42);
+    color: #050714;
+    font-weight: 600;
+    text-shadow: 0 0 4px rgba(255,255,255,0.3);
+  }
+
+  .ui button.primary:hover {
+    box-shadow: 0 14px 32px rgba(59,130,246,0.6);
+  }
+
+  .ui button.secondary.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(85, 230, 255, 0.6), 0 12px 30px rgba(85, 230, 255, 0.3);
+    background: radial-gradient(circle at top left, rgba(85, 230, 255, 0.25), rgba(12, 34, 57, 1));
+  }
+
+  .meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .meta strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .meta code {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 11px;
+    padding: 1px 5px;
+    border-radius: 999px;
+    background: rgba(5, 12, 24, 0.95);
+    border: 1px solid rgba(120, 211, 255, 0.32);
+    color: var(--accent-secondary);
+  }
+
+  /* TIMELINE SCRUBBER */
+  .ui-timeline {
+    margin-top: 6px;
+  }
+
+  .ui-timeline-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+  }
+
+  .ui-timeline input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: radial-gradient(circle at left, var(--accent-soft), rgba(255,255,255,0.06));
+    outline: none;
+  }
+
+  .ui-timeline input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(85, 230, 255, 0.35);
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.6);
+  }
+
+  .ui-timeline input[type="range"]::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(85, 230, 255, 0.35);
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.6);
+  }
+
+  /* SHADER SLIDERS */
+  .ui-sliders {
+    margin-top: 4px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 6px 10px;
+  }
+
+  .slider-group {
+    min-width: 0;
+  }
+
+  .slider-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 1px;
+  }
+
+  .slider-value {
+    color: var(--accent);
+  }
+
+  .slider-group input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    outline: none;
+  }
+
+  .slider-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(85, 230, 255, 0.25);
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.6);
+  }
+
+  .slider-group input[type="range"]::-moz-range-thumb {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(85, 230, 255, 0.25);
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.6);
+  }
+
+  /* HUD (top-right) */
+  .hud {
+    position: fixed;
+    right: 18px;
+    top: 18px;
+    z-index: 18;
+    display: flex;
+    gap: 10px;
+    padding: 8px 11px;
+    background: var(--panel-bg);
+    border-radius: 999px;
+    border: 1px solid var(--panel-border);
+    box-shadow: var(--shadow-small);
+    backdrop-filter: blur(var(--blur-soft)) saturate(150%);
+    -webkit-backdrop-filter: blur(var(--blur-soft)) saturate(150%);
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    animation: hud-fade-in 420ms var(--transition-med);
+  }
+
+  .hud-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .hud-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .hud-value {
+    color: var(--accent);
+  }
+
+  .hud-separator {
+    width: 1px;
+    height: 16px;
+    background: linear-gradient(to bottom, transparent, rgba(200, 230, 255, 0.55), transparent);
+    opacity: 0.7;
+  }
+
+  /* LOG / ERROR PANEL */
+  #log {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    max-width: min(42vw, 520px);
+    background: var(--error-bg);
+    color: #ffd5d5;
+    padding: 10px 12px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--error-border);
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 12px;
+    display: none;
+    white-space: pre-wrap;
+    z-index: 25;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+  }
+
+  #log::before {
+    content: "WebGL Diagnostics";
+    display: block;
+    font-size: 11px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #ff9b9b;
+    opacity: 0.9;
+  }
+
+  @keyframes ui-pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes hud-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* small screen tweaks */
+  @media (max-width: 640px) {
+    .ui {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 8px 10px 10px;
+    }
+    .ui-row {
+      flex-wrap: wrap;
+    }
+    .hud {
+      top: 10px;
+      right: 10px;
+      left: 10px;
+      justify-content: center;
+      border-radius: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="ui">
+  <div class="ui-header">
+    <div class="ui-dot"></div>
+    <span class="ui-title-strong">Neon Wave Console</span>
+  </div>
+
+  <div class="ui-row">
+    <button id="play" class="primary">
+      <span class="icon">⏯</span>
+      <span class="label">Pause</span>
+    </button>
+    <button id="screenshot">
+      <span class="icon">📸</span>
+      <span class="label">Screenshot</span>
+    </button>
+    <button id="color-mode" class="secondary">
+      <span class="icon">🎨</span>
+      <span class="label">Mode: NEON</span>
+    </button>
+    <button id="toggle-dpr" class="secondary active" data-state="dpr">
+      <span class="icon">🖥</span>
+      <span class="label">Pixel Ratio: DPR</span>
+    </button>
+  </div>
+
+  <div class="ui-timeline">
+    <div class="ui-timeline-label-row">
+      <span>Timeline</span>
+      <span id="timeline-readout">0.0s</span>
+    </div>
+    <input type="range" id="timeline" min="0" max="1" step="0.001" value="0" />
+  </div>
+
+  <div class="ui-sliders">
+    <div class="slider-group">
+      <div class="slider-header">
+        <span>Amp</span>
+        <span id="val-amp" class="slider-value">0.10</span>
+      </div>
+      <input type="range" id="slider-amp" min="0.02" max="0.30" step="0.005" value="0.10" />
+    </div>
+    <div class="slider-group">
+      <div class="slider-header">
+        <span>Thickness</span>
+        <span id="val-thick" class="slider-value">0.010</span>
+      </div>
+      <input type="range" id="slider-thick" min="0.003" max="0.040" step="0.001" value="0.010" />
+    </div>
+    <div class="slider-group">
+      <div class="slider-header">
+        <span>Density</span>
+        <span id="val-dense" class="slider-value">0.12</span>
+      </div>
+      <input type="range" id="slider-density" min="0.05" max="0.25" step="0.005" value="0.12" />
+    </div>
+    <div class="slider-group">
+      <div class="slider-header">
+        <span>Speed</span>
+        <span id="val-speed" class="slider-value">2.0</span>
+      </div>
+      <input type="range" id="slider-speed" min="0.5" max="4.0" step="0.1" value="2.0" />
+    </div>
+  </div>
+
+  <div class="meta">
+    <strong>GLSL</strong> neon sine field · fragment-space only · <code>vec2 p</code> domain warp
+  </div>
+</div>
+
+<div class="hud">
+  <div class="hud-item">
+    <span class="hud-label">Time</span>
+    <span id="hud-time" class="hud-value">0.0s</span>
+  </div>
+  <div class="hud-separator"></div>
+  <div class="hud-item">
+    <span class="hud-label">DPR</span>
+    <span id="hud-dpr" class="hud-value">1.00</span>
+  </div>
+  <div class="hud-separator"></div>
+  <div class="hud-item">
+    <span class="hud-label">FPS</span>
+    <span id="hud-fps" class="hud-value">0</span>
+  </div>
+  <div class="hud-separator"></div>
+  <div class="hud-item">
+    <span class="hud-label">Mode</span>
+    <span id="hud-mode" class="hud-value">NEON</span>
+  </div>
+</div>
+
+<div id="log"></div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('canvas');
+  const gl = canvas.getContext('webgl', { antialias: true, preserveDrawingBuffer: true });
+  const logEl = document.getElementById('log');
+
+  if (!gl) {
+    logEl.style.display = 'block';
+    logEl.textContent = 'WebGL not supported in this browser or context could not be created.';
+    return;
+  }
+
+  // Vertex shader
+  const vsSrc =
+    'attribute vec2 a_position;' +
+    'void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }';
+
+  // Fragment shader with color modes & param uniforms
+  const fsSrc = `
+    precision highp float;
+    uniform vec2 r;
+    uniform float t;
+    uniform float uAmp;
+    uniform float uThickness;
+    uniform float uDensity;
+    uniform float uSpeed;
+    uniform int uMode;
+
+    vec3 getColor1(int mode) {
+      if (mode == 0) {          // NEON
+        return vec3(0.0, 0.8, 1.0);
+      } else if (mode == 1) {   // FIRE
+        return vec3(1.0, 0.8, 0.2);
+      } else if (mode == 2) {   // AURORA
+        return vec3(0.3, 1.0, 0.6);
+      } else {                  // MONO
+        return vec3(0.85);
+      }
+    }
+
+    vec3 getColor2(int mode) {
+      if (mode == 0) {          // NEON
+        return vec3(0.8, 0.0, 0.5);
+      } else if (mode == 1) {   // FIRE
+        return vec3(1.0, 0.3, 0.0);
+      } else if (mode == 2) {   // AURORA
+        return vec3(0.0, 0.4, 1.0);
+      } else {                  // MONO
+        return vec3(0.2);
+      }
+    }
+
+    void main() {
+      vec2 FC = gl_FragCoord.xy;
+      vec2 p = (FC * 2.0 - r) / r.y;
+      vec3 c = vec3(0.0);
+
+      vec3 col1 = getColor1(uMode);
+      vec3 col2 = getColor2(uMode);
+
+      for (float i = -15.0; i < 15.0; i++) {
+        float x = i * uDensity;
+        float a = x * 5.0 - t * uSpeed;
+        float y = sin(a) * uAmp;
+
+        vec2 q = p - vec2(x, 0.0);
+        float h = max(abs(q.y) - abs(y), abs(q.x) - uThickness);
+
+        c += col1 * 0.003 / h;
+        c += col2 * 0.006 / length(p - vec2(x, y));
+      }
+
+      gl_FragColor = vec4(c, 1.0);
+    }`;
+
+  function compileShader(src, type) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      const kind = type === gl.VERTEX_SHADER ? 'Vertex' : 'Fragment';
+      const msg = kind + ' shader compile error:\n' + gl.getShaderInfoLog(s);
+      throw new Error(msg);
+    }
+    return s;
+  }
+
+  function linkProgram(vs, fs) {
+    const p = gl.createProgram();
+    gl.attachShader(p, vs);
+    gl.attachShader(p, fs);
+    gl.bindAttribLocation(p, 0, 'a_position');
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+      const msg = 'Program link error:\n' + gl.getProgramInfoLog(p);
+      throw new Error(msg);
+    }
+    return p;
+  }
+
+  let program;
+  try {
+    const vs = compileShader(vsSrc, gl.VERTEX_SHADER);
+    const fs = compileShader(fsSrc, gl.FRAGMENT_SHADER);
+    program = linkProgram(vs, fs);
+  } catch (e) {
+    logEl.style.display = 'block';
+    logEl.textContent = e.message;
+    console.error(e);
+    return;
+  }
+
+  gl.useProgram(program);
+
+  // Fullscreen triangle
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(
+    gl.ARRAY_BUFFER,
+    new Float32Array([-1, -1, 3, -1, -1, 3]),
+    gl.STATIC_DRAW
+  );
+  const posLoc = gl.getAttribLocation(program, 'a_position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  // Uniforms
+  const uRes = gl.getUniformLocation(program, 'r');
+  const uTime = gl.getUniformLocation(program, 't');
+  const uAmp = gl.getUniformLocation(program, 'uAmp');
+  const uThickness = gl.getUniformLocation(program, 'uThickness');
+  const uDensity = gl.getUniformLocation(program, 'uDensity');
+  const uSpeed = gl.getUniformLocation(program, 'uSpeed');
+  const uMode = gl.getUniformLocation(program, 'uMode');
+
+  // UI elements
+  const playBtn = document.getElementById('play');
+  const screenshotBtn = document.getElementById('screenshot');
+  const toggleDprBtn = document.getElementById('toggle-dpr');
+  const colorModeBtn = document.getElementById('color-mode');
+
+  const hudTime = document.getElementById('hud-time');
+  const hudDpr = document.getElementById('hud-dpr');
+  const hudFps = document.getElementById('hud-fps');
+  const hudMode = document.getElementById('hud-mode');
+
+  const timeline = document.getElementById('timeline');
+  const timelineReadout = document.getElementById('timeline-readout');
+
+  const sliderAmp = document.getElementById('slider-amp');
+  const sliderThick = document.getElementById('slider-thick');
+  const sliderDensity = document.getElementById('slider-density');
+  const sliderSpeed = document.getElementById('slider-speed');
+
+  const valAmp = document.getElementById('val-amp');
+  const valThick = document.getElementById('val-thick');
+  const valDense = document.getElementById('val-dense');
+  const valSpeed = document.getElementById('val-speed');
+
+  let startTime = performance.now();
+  let running = true;
+  let useDPR = true;
+  let currentDpr = window.devicePixelRatio || 1;
+
+  // Shader param state
+  let shaderAmp = parseFloat(sliderAmp.value);
+  let shaderThickness = parseFloat(sliderThick.value);
+  let shaderDensity = parseFloat(sliderDensity.value);
+  let shaderSpeed = parseFloat(sliderSpeed.value);
+
+  // Color modes
+  const colorModes = ['NEON', 'FIRE', 'AURORA', 'MONO'];
+  let modeIndex = 0;
+
+  // Timeline state
+  const timelineDuration = 20.0; // seconds for loop mapping
+  let manualTime = null;         // when scrubbing while paused
+
+  let lastFrameTime = performance.now();
+  let fps = 0;
+
+  // Initial label values
+  valAmp.textContent = shaderAmp.toFixed(2);
+  valThick.textContent = shaderThickness.toFixed(3);
+  valDense.textContent = shaderDensity.toFixed(2);
+  valSpeed.textContent = shaderSpeed.toFixed(1);
+
+  function resizeCanvas() {
+    currentDpr = useDPR ? (window.devicePixelRatio || 1) : 1;
+    const w = Math.floor(window.innerWidth * currentDpr);
+    const h = Math.floor(window.innerHeight * currentDpr);
+
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      gl.viewport(0, 0, w, h);
+    }
+  }
+
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+  });
+
+  resizeCanvas();
+
+  function updateHUD(tSeconds) {
+    hudTime.textContent = tSeconds.toFixed(1) + 's';
+    hudDpr.textContent = currentDpr.toFixed(2);
+    hudFps.textContent = Math.round(fps).toString();
+    hudMode.textContent = colorModes[modeIndex];
+    timelineReadout.textContent = (tSeconds % timelineDuration).toFixed(1) + 's';
+  }
+
+  function drawFrame(tSeconds) {
+    resizeCanvas();
+
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, tSeconds);
+    gl.uniform1f(uAmp, shaderAmp);
+    gl.uniform1f(uThickness, shaderThickness);
+    gl.uniform1f(uDensity, shaderDensity);
+    gl.uniform1f(uSpeed, shaderSpeed);
+    gl.uniform1i(uMode, modeIndex);
+
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+    // Update timeline slider position when running (no manual override)
+    if (running && manualTime === null) {
+      const norm = (tSeconds % timelineDuration) / timelineDuration;
+      timeline.value = norm.toFixed(3);
+    }
+    updateHUD(tSeconds);
+  }
+
+  function render() {
+    if (!running) return;
+
+    const now = performance.now();
+    const dt = now - lastFrameTime;
+    lastFrameTime = now;
+    fps = 1000 / Math.max(dt, 0.001);
+
+    const tSeconds = (now - startTime) * 0.001;
+    drawFrame(tSeconds);
+
+    requestAnimationFrame(render);
+  }
+
+  // One-off render for manual timeline scrubbing
+  function renderSingle(tSeconds) {
+    // Keep fps as last known; not critical for static frame
+    drawFrame(tSeconds);
+  }
+
+  requestAnimationFrame(render);
+
+  // UI handlers
+  playBtn.addEventListener('click', () => {
+    const labelSpan = playBtn.querySelector('.label');
+    const iconSpan = playBtn.querySelector('.icon');
+
+    if (running) {
+      // pause
+      running = false;
+      const pausedT = (performance.now() - startTime) * 0.001;
+      playBtn.dataset.t = pausedT.toString();
+      labelSpan.textContent = 'Play';
+      iconSpan.textContent = '▶';
+      manualTime = pausedT;
+    } else {
+      // resume
+      const storedT = manualTime !== null
+        ? manualTime
+        : (parseFloat(playBtn.dataset.t || '0') || 0);
+
+      startTime = performance.now() - storedT * 1000;
+      lastFrameTime = performance.now();
+      running = true;
+      manualTime = null;
+
+      labelSpan.textContent = 'Pause';
+      iconSpan.textContent = '⏯';
+      requestAnimationFrame(render);
+    }
+  });
+
+  screenshotBtn.addEventListener('click', () => {
+    try {
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+      a.download = 'neon-wave-' + stamp + '.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch (err) {
+      logEl.style.display = 'block';
+      logEl.textContent = 'Screenshot failed:\n' + err.message;
+      console.error(err);
+    }
+  });
+
+  toggleDprBtn.addEventListener('click', () => {
+    useDPR = !useDPR;
+    const labelSpan = toggleDprBtn.querySelector('.label');
+
+    if (useDPR) {
+      toggleDprBtn.classList.add('active');
+      labelSpan.textContent = 'Pixel Ratio: DPR';
+    } else {
+      toggleDprBtn.classList.remove('active');
+      labelSpan.textContent = 'Pixel Ratio: 1x';
+    }
+
+    resizeCanvas();
+
+    const now = performance.now();
+    const baseTime = running ? (now - startTime) * 0.001 : (manualTime || 0);
+    currentDpr = useDPR ? (window.devicePixelRatio || 1) : 1;
+
+    renderSingle(baseTime);
+  });
+
+  // Color mode cycling
+  colorModeBtn.addEventListener('click', () => {
+    modeIndex = (modeIndex + 1) % colorModes.length;
+    const labelSpan = colorModeBtn.querySelector('.label');
+    labelSpan.textContent = 'Mode: ' + colorModes[modeIndex];
+
+    // small visual accent on active-ish modes (not MONO)
+    if (modeIndex === colorModes.length - 1) {
+      colorModeBtn.classList.remove('active');
+    } else {
+      colorModeBtn.classList.add('active');
+    }
+
+    const baseTime = running
+      ? (performance.now() - startTime) * 0.001
+      : (manualTime || 0);
+    renderSingle(baseTime);
+  });
+
+  // Timeline scrubbing: scrubbing auto-pauses and sets manualTime
+  timeline.addEventListener('input', () => {
+    const norm = parseFloat(timeline.value) || 0;
+    const tSeconds = norm * timelineDuration;
+    manualTime = tSeconds;
+
+    // If it was running, pause
+    if (running) {
+      running = false;
+      const labelSpan = playBtn.querySelector('.label');
+      const iconSpan = playBtn.querySelector('.icon');
+      labelSpan.textContent = 'Play';
+      iconSpan.textContent = '▶';
+    }
+
+    playBtn.dataset.t = tSeconds.toString();
+    renderSingle(tSeconds);
+  });
+
+  // Slider handlers
+  sliderAmp.addEventListener('input', () => {
+    shaderAmp = parseFloat(sliderAmp.value) || shaderAmp;
+    valAmp.textContent = shaderAmp.toFixed(2);
+    const baseTime = running
+      ? (performance.now() - startTime) * 0.001
+      : (manualTime || 0);
+    renderSingle(baseTime);
+  });
+
+  sliderThick.addEventListener('input', () => {
+    shaderThickness = parseFloat(sliderThick.value) || shaderThickness;
+    valThick.textContent = shaderThickness.toFixed(3);
+    const baseTime = running
+      ? (performance.now() - startTime) * 0.001
+      : (manualTime || 0);
+    renderSingle(baseTime);
+  });
+
+  sliderDensity.addEventListener('input', () => {
+    shaderDensity = parseFloat(sliderDensity.value) || shaderDensity;
+    valDense.textContent = shaderDensity.toFixed(2);
+    const baseTime = running
+      ? (performance.now() - startTime) * 0.001
+      : (manualTime || 0);
+    renderSingle(baseTime);
+  });
+
+  sliderSpeed.addEventListener('input', () => {
+    shaderSpeed = parseFloat(sliderSpeed.value) || shaderSpeed;
+    valSpeed.textContent = shaderSpeed.toFixed(1);
+    const baseTime = running
+      ? (performance.now() - startTime) * 0.001
+      : (manualTime || 0);
+    renderSingle(baseTime);
+  });
+
+  // Keyboard shortcuts: P = play/pause, S = screenshot, D = DPR, C = color mode
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'p' || ev.key === 'P') {
+      playBtn.click();
+    } else if (ev.key === 's' || ev.key === 'S') {
+      screenshotBtn.click();
+    } else if (ev.key === 'd' || ev.key === 'D') {
+      toggleDprBtn.click();
+    } else if (ev.key === 'c' || ev.key === 'C') {
+      colorModeBtn.click();
+    }
+  });
+})();
+</script>
+</body>
+</html>
